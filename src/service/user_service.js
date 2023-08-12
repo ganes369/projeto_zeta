@@ -11,13 +11,19 @@ class UserService {
         const user = await this.user.getOne(id)
         return user
        } catch (error) {
-        console.log(error.message)
+         console.log(error.message)
          return new UserError(error.message, '001')
        }  
     };
 
-    createUser({email,pass, id, permission}){
-        return  this.user.create({email,pass, id, permission})
+    createUser({email,pass, id, permission}, jwt){
+       try {
+         const result  = this.user.create({email,pass, id, permission})
+         const token = jwt.sign({permission, email}, 7200)
+         return {result, token}
+       } catch (error) {
+        return error
+       }
     }
 }
 module.exports = UserService

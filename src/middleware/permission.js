@@ -21,5 +21,11 @@ function authenticateAdmin(req,res,next) {
 };
 
 module.exports = {
-    authenticateAdmin
+    authenticateAdmin,
+    PERMISSION_READ,
+    PERMISSION_WRITE,
+    PERMISSION_DELETE,
+    PERMISSION_UPDATE,
+    PERMISSION_EXPORT,
+    PERMISSION_ADMIN
 }

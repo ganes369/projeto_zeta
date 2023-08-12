@@ -1,26 +1,26 @@
-const express = require('express')
+const express = require('express');
 
-function deletePass(user,...args){
-    const aux = user
-    if(aux instanceof Array){
-        aux?.forEach(userItem=> {
-            args.forEach(i=> Reflect.deleteProperty(userItem, i))
-        })
-    }
-    if(user){
-        args?.forEach(i=> Reflect.deleteProperty(aux, i))
-    } 
-    return aux
+function deleteProp(user, ...args) {
+  const aux = user;
+  if (aux instanceof Array) {
+    aux?.forEach((userItem) => {
+      args.forEach((i) => Reflect.deleteProperty(userItem, i));
+    });
+  }
+  if (user) {
+    args?.forEach((i) => Reflect.deleteProperty(aux, i));
+  }
+  return aux;
 }
 
-function decorator  () {
-   const oldRespose = express.response.json//.toString()
-   
-   express.response.json = function(...args) {
-    args[0] = deletePass(args[0], 'pass')
+function decoratorResponse() {
+  const oldRespose = express.response.json; // .toString()
 
-    return oldRespose.apply(this, args)
-   }
-  }
-    
-  module.exports ={ decorator};
+  express.response.json = function (...args) {
+    args[0] = deleteProp(args[0], 'pass');
+
+    return oldRespose.apply(this, args);
+  };
+}
+
+module.exports = { decoratorResponse };

@@ -1,6 +1,5 @@
 const { readFile } = require('fs/promises');
 const UserBase = require('../entities/user_base');
-const UserError = require('../error/user');
 
 class UserRespository {
   constructor(file) {

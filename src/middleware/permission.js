@@ -12,7 +12,14 @@ function hasPermission(userPermissions, requiredPermission) {
 }
 
 // Função para autenticar o usuário e verificar permissões
-function authenticateAdmin(req, res, next) {
+function permissionAdmin(req, res, next) {
+  // Verificando a permissão
+  if (!hasPermission(req.permission, PERMISSION_ADMIN))
+    return res.status(401).json({ auth: false, message: 'unauthorized' });
+  next();
+}
+
+function permissionRead(req, res, next) {
   // Verificando a permissão
   if (!hasPermission(req.permission, PERMISSION_READ))
     return res.status(401).json({ auth: false, message: 'unauthorized' });
@@ -20,11 +27,6 @@ function authenticateAdmin(req, res, next) {
 }
 
 module.exports = {
-  authenticateAdmin,
-  PERMISSION_READ,
-  PERMISSION_WRITE,
-  PERMISSION_DELETE,
-  PERMISSION_UPDATE,
-  PERMISSION_EXPORT,
-  PERMISSION_ADMIN,
+  permissionAdmin,
+  permissionRead,
 };

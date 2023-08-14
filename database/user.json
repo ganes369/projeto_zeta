@@ -3,7 +3,15 @@
     "id": 1,
     "nick": "user",
     "pass": "123",
-    "email": "u@gmail.com",
-    "permission": 1
+    "email": "aras@gmail.com",
+    "permission": 63
+  },
+
+  {
+    "id": 2,
+    "nick": "maria",
+    "pass": "123",
+    "email": "maria@gmail.com",
+    "permission": 17
   }
 ]

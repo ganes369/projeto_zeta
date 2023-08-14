@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "O Pequeno Príncipe",
+    "autor": "Antoine de Saint-Exupéry",
+    "generos": [
+      "Literatura infantil",
+      "Novela",
+      "Fábula",
+      "Ficção especulativa"
+    ]
+  },
+
+  {
+    "id": 2,
+    "title": "Dom Casmurro",
+    "autor": "Machado de Assis",
+    "generos": ["Romance", "Ficção", "Memórias", "Realismo", "Literário"]
+  }
+]

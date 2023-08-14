@@ -1,29 +1,20 @@
-const UserError = require('../error/error');
+const UserError = require('../error/user');
 const UserRespository = require('../repositories/user_repository');
 
 class UserService {
-  constructor(file) {
+  constructor(file, jwt) {
     this.user = new UserRespository(file);
+    this.jwt = jwt;
   }
 
-  async getOneUser(id) {
-    try {
-      const user = await this.user.getOne(id);
-      return user;
-    } catch (error) {
-      console.log(error.message);
-      return new UserError(error.message, '001');
-    }
-  }
-
-  createUser({ email, pass, id, permission }, jwt) {
-    try {
-      const result = this.user.create({ email, pass, id, permission });
-      const token = jwt.sign({ permission, email }, 7200);
-      return { result, token };
-    } catch (error) {
-      return error;
-    }
+  async login({ email, pass }) {
+    const user = await this.user.login({ email, pass });
+    if (!user) throw new UserError('wrong password or email ;(', 404);
+    const jwt = this.jwt.sign(
+      { id: user.id, permission: user.permission, email },
+      7200
+    );
+    return { ...user, token: jwt };
   }
 }
 module.exports = UserService;

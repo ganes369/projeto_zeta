@@ -1,23 +1,19 @@
 const { readFile } = require('fs/promises');
+const UserBase = require('../entities/user_base');
+const UserError = require('../error/user');
 
 class UserRespository {
   constructor(file) {
     this.file = file;
   }
 
-  async getOne(itemId) {
+  async login({ email, pass }) {
     const content = JSON.parse(await readFile(this.file));
-    if (!itemId) return 'not found :(';
-    return content.find(({ id }) => id === itemId);
-  }
-
-  create({ email, pass, id, permission }) {
-    return {
-      email,
-      pass,
-      id,
-      permission,
-    };
+    const user = content.find(
+      (item) => item.email === email && item.pass === pass
+    );
+    if (!user) return;
+    return new UserBase(user);
   }
 }
 

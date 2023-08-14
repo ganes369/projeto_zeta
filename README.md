@@ -1,12 +1,12 @@
-## Biblioteca zeta
+## Biblioteca, zeta
 
-Este projeto conciste em uma api com javascript que usa o node como runtime.
+Este projeto consiste em uma api com javascript que usa o node como runtime.
 
-o intuito desse projeto é gerenciar um sistema de biblioteca que faz emprestimos de livros
+o intuito desse projeto é gerenciar um sistema de biblioteca que faz empréstimos de livros
 
 nesse projeto abordo alguns conceitos como:
 1. autenticação
-2. permissoes (usando o sistema binario de permissoes)
+2. permissões (usando o sistema binário de permissões)
 3. interceptor (decorator interceptar requisições)
 4. servidor
 5. teste

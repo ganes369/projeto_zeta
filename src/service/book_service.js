@@ -21,7 +21,7 @@ class BookService {
 
     async loanBook(req, userRepository) {
         const { id: adminId } = req.payload;
-        const { id: userId, idbook } = req.body;
+        const { userId, bookId } = req.body;
 
         const admin = await userRepository.findOneUser(adminId);
         if (!admin) throw new UserError('User not found ;(', 404);
@@ -29,7 +29,7 @@ class BookService {
         const user = await userRepository.findOneUser(userId);
         if (!user) throw new UserError('User not found ;(', 404);
 
-        const book = await this.book.findBookId(idbook);
+        const book = await this.book.findBookId(bookId);
 
         if (!book) throw new BookError('The book not found ;(', 404);
         // console.log(book)

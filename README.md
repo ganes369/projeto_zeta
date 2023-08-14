@@ -10,6 +10,7 @@ nesse projeto abordo alguns conceitos como:
 3. interceptor (decorator interceptar requisições)
 4. servidor
 5. teste
+6. injeção de dependências
 
 rodar
 1. npm ci

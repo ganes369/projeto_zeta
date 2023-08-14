@@ -20,9 +20,10 @@ class BookRespository {
 
     async findBookId(id) {
         const content = JSON.parse(await readFile(this.file));
-        const book = content.find((item) => item.id === id);
-        if (!book) return;
-        return new Book(content[0].id);
+        const book = content.find((item) => +item.id === +id);
+
+        if (!book) return null;
+        return new Book(book);
     }
 
     async allBook() {

@@ -8,13 +8,15 @@
       "Novela",
       "Fábula",
       "Ficção especulativa"
-    ]
+    ],
+    "status": "free"
   },
 
   {
     "id": 2,
     "title": "Dom Casmurro",
     "autor": "Machado de Assis",
-    "generos": ["Romance", "Ficção", "Memórias", "Realismo", "Literário"]
+    "generos": ["Romance", "Ficção", "Memórias", "Realismo", "Literário"],
+    "status": "free"
   }
 ]

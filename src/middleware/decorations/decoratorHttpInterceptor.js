@@ -2,17 +2,17 @@ const express = require('express');
 const { deleteProp } = require('../../utils/hidePropertie');
 
 async function DecoratorHttpInterceptor() {
-  const oldRespose = express.response.json; // .toString()
+    const oldRespose = express.response.json; // .toString()
 
-  express.response.json = function (...args) {
-    const oldEmit = express?.response.setHeader; // .toString()
-    if (args[0].token) {
-      oldEmit.apply(this, ['token', args[0].token]);
-      args[0] = deleteProp(args[0], 'token');
-    }
+    express.response.json = function (...args) {
+        const oldEmit = express?.response.setHeader; // .toString()
+        if (args[0].token) {
+            oldEmit.apply(this, ['token', args[0].token]);
+            args[0] = deleteProp(args[0], 'token');
+        }
 
-    return oldRespose.apply(this, args);
-  };
+        return oldRespose.apply(this, args);
+    };
 }
 
 module.exports = { DecoratorHttpInterceptor };

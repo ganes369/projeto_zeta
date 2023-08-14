@@ -1,12 +1,11 @@
 class Book {
-  constructor({ id, title, autor, generos }) {
-    (this.id = id), (this.title = title), (this.autor = autor);
-    this.generos = generos ?? [];
-  }
-
-  subscribe(observer) {
-    this.subscribers.push(observer);
-  }
+    constructor({ id, title, autor, generos, status }) {
+        (this.id = id),
+            (this.title = title),
+            (this.autor = autor),
+            (this.status = status);
+        this.generos = generos ?? [];
+    }
 }
 
 module.exports = Book;

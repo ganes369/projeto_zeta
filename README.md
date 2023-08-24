@@ -18,3 +18,9 @@ rodar
 
 deixei uma collection pronta para as rotas serem testadas (que futuramente servirá como documentação)
 1. importe a collection que se encontra na pasta raiz do projeto em algum cliente de api (insonmia)
+
+
+para contribuir:
+1. faça um fork do repositorio 
+2. faça o clone do fork `git clone`
+3. e crie uma Pull Request, no repositório original (de onde você fez o fork), você verá uma opção para criar um Pull Request a partir do seu branch. Clique nesse botão e siga as instruções para criar o PR. Certifique-se de incluir uma descrição clara das suas alterações.

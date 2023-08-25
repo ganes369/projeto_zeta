@@ -1,4 +1,4 @@
-const UserError = require('../error/user');
+const UserError = require('../error/usuarios');
 
 class UserService {
     constructor(repository, jwt, bcrypt) {

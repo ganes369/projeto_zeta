@@ -1,5 +1,5 @@
-const LivroError = require('../error/livro');
-const LivroService = require('../service/livro_service');
+const LivroError = require('../error/livros');
+const LivroService = require('../service/livros');
 const { DecoratorHttpInterceptor } = require('../middleware/decorations/decoratorHttpInterceptor');
 const { DecoratorResponse } = require('../middleware/decorations/decoratorResponse');
 

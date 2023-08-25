@@ -1,4 +1,4 @@
-const LivroError = require("../error/livro");
+const LivroError = require("../error/livros");
 
 class LivroService {
     constructor(repository) {

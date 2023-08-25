@@ -1,5 +1,5 @@
-const UserService = require('../service/user_service');
-const UserError = require('../error/user');
+const UserService = require('../service/usuarios');
+const UserError = require('../error/usuarios');
 const BcryptService = require('../utils/encrypt');
 
 const path = require('path');

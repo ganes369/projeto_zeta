@@ -1,4 +1,4 @@
-const UsuarioEntity = require('../entities/usuario');
+const UsuarioEntity = require('../entities/usuarios');
 
 class UserRespository {
     constructor(conn) {

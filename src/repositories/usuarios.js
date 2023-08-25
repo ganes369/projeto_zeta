@@ -1,6 +1,6 @@
-const UsuarioEntity = require('../entities/usuarios');
+const UsuarioEntidade = require('../entities/usuarios');
 
-class UserRespository {
+class UsuarioRepositorio {
     constructor(conn) {
         this.conn = conn;
     }
@@ -8,7 +8,7 @@ class UserRespository {
     async login({ email }) {
         const user = await this.conn.findOne({ where: { email } });
         if(!user) return
-        return new UsuarioEntity({
+        return new UsuarioEntidade({
             id: user.id, 
             nome: user.nome, 
             email: user.email, 
@@ -21,7 +21,7 @@ class UserRespository {
 
     async cadastrar({ nome, email, senha, permissao }) {
         const user = await this.conn.create({ nome, email, senha, permissao })
-        return  new UsuarioEntity({
+        return  new UsuarioEntidade({
              id: user.id, 
              nome: user.nome, 
              email: user.email, 
@@ -33,4 +33,4 @@ class UserRespository {
     }
 }
 
-module.exports = UserRespository;
+module.exports = UsuarioRepositorio;

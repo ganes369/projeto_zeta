@@ -1,4 +1,4 @@
-class UsuarioEntity {
+class Usuarios {
     constructor({ id, nome, email, senha, permissao, created, updated }) {
         this.id = id;
         this.nome = nome;
@@ -17,4 +17,4 @@ class UsuarioEntity {
     }
 }
 
-module.exports = UsuarioEntity;
+module.exports = Usuarios;

@@ -1,5 +1,5 @@
-const UserService = require('../service/usuarios');
-const UserError = require('../error/usuarios');
+const UsuarioService = require('../service/usuarios');
+const UsuarioError = require('../error/usuarios');
 const BcryptService = require('../utils/encrypt');
 
 const path = require('path');
@@ -15,7 +15,7 @@ class User {
     constructor(router, jwt, user) {
         this.router = router;
         this.jwt = jwt;
-        this.user = new UserService(user,this.jwt, new BcryptService());
+        this.user = new UsuarioService(user,this.jwt, new BcryptService());
 
         this.router.post('/login', this.login.bind(this));
         this.router.post('/cadastro', this.jwt.verify,
@@ -28,7 +28,7 @@ class User {
             const user = await this.user.login({ email, senha });
             return res.json(user);
         } catch (error) {
-            const err = new UserError(error.message, error.errorCode || 500);
+            const err = new UsuarioError(error.message, error.errorCode || 500);
             return res
                 .status(err.errorCode)
                 .json(JSON.parse(JSON.stringify(err, null, 2)));
@@ -41,7 +41,7 @@ class User {
             const user = await this.user.cadastrar({ nome, email, senha, permissao })
             return res.status(200).json(user);
         } catch (error) {
-            const err = new UserError(error.message, error.errorCode || 500);
+            const err = new UsuarioError(error.message, error.errorCode || 500);
             return res
                 .status(err.errorCode)
                 .json(JSON.parse(JSON.stringify(err, null, 2)));

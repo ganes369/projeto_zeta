@@ -1,4 +1,4 @@
-const UserError = require('../error/usuarios');
+const UsuariosError = require('../error/usuarios');
 
 class UserService {
     constructor(repository, jwt, bcrypt) {
@@ -9,11 +9,11 @@ class UserService {
 
     async login({ email, senha }) {
         const user = await this.user.login({ email });
-        if (!user) throw new UserError('wrong password or email ;(', 404);
+        if (!user) throw new UsuariosError('wrong password or email ;(', '404');
 
         const isMatch = await this.bcrypt.compare(senha, user.senha);
 
-        if(!isMatch) throw new UserError('wrong password or email ;(', '404');
+        if(!isMatch) throw new UsuariosError('wrong password or email ;(', '404');
 
         const jwt = this.jwt.sign(
             { id: user.id, permission: user.permission, email },

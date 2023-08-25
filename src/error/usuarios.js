@@ -1,11 +1,11 @@
-class UserError extends Error {
+class UsuariosErro extends Error {
     constructor(message, errorCode) {
         super();
-        this.name = 'UserError';
+        this.name = 'UsuariosError';
         this.errorCode = errorCode;
         this.message = message;
         this.date = new Date();
     }
 }
 
-module.exports = UserError;
+module.exports = UsuariosErro;

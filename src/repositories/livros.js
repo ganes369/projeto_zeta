@@ -1,6 +1,6 @@
-const Livros = require('../entities/livros');
+const LivrosEntidade = require('../entities/livros');
 
-class BookRespository {
+class LivroRepositorio {
     constructor(conn) {
         this.conn = conn;
         this.tamanho_pagina = 10
@@ -13,7 +13,7 @@ class BookRespository {
         });
         const result = []
         for(const livro of livros){
-            result.push(new Livros({
+            result.push(new LivrosEntidade({
                 id: livro.id, 
                 titulo: livro.titulo,
                 autor: livro.autor, 
@@ -30,7 +30,7 @@ class BookRespository {
     async listarPorId(id){
         const livro = await this.conn.findByPk(id);
         if(!livro) return
-        return new Livros({
+        return new LivrosEntidade({
             id: livro?.id, 
             titulo: livro?.titulo,
             autor: livro?.autor, 
@@ -43,4 +43,4 @@ class BookRespository {
     }
 }
 
-module.exports = BookRespository;
+module.exports = LivroRepositorio;

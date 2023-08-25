@@ -1,11 +1,11 @@
-class BookError extends Error {
+class LivroError extends Error {
     constructor(message, errorCode) {
         super();
-        this.name = 'BookError';
+        this.name = 'LivroError';
         this.errorCode = errorCode;
         this.message = message;
         this.date = new Date();
     }
 }
 
-module.exports = BookError;
+module.exports = LivroError;

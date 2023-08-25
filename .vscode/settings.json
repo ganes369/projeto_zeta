@@ -1,0 +1,8 @@
+{
+    "terminal.integrated.shellIntegration.suggestEnabled": true,
+    "editor.suggestSelection": "first",
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.quickSuggestions": {
+        "strings": true
+    }
+}

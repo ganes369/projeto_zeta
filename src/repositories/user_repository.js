@@ -1,26 +1,35 @@
-const { readFile } = require('fs/promises');
-const UserBase = require('../entities/user_base');
+const UsuarioEntity = require('../entities/usuario');
 
 class UserRespository {
-    constructor(file) {
-        this.file = file;
+    constructor(conn) {
+        this.conn = conn;
     }
 
-    async login({ email, pass }) {
-        const content = JSON.parse(await readFile(this.file));
-        const user = content.find(
-            (item) => item.email === email && item.pass === pass
-        );
-        if (!user) return;
-        return new UserBase(user);
+    async login({ email }) {
+        const user = await this.conn.findOne({ where: { email } });
+        if(!user) return
+        return new UsuarioEntity({
+            id: user.id, 
+            nome: user.nome, 
+            email: user.email, 
+            senha: user.senha, 
+            permissao: user.permissao,
+            created: user.created_at,
+            updated: user.updated_at
+        });
     }
 
-    async findOneUser(id) {
-        const content = JSON.parse(await readFile(this.file));
-        const user = content.find((item) => item.id === id);
-        if (!user) return;
-        Reflect.deleteProperty(user, 'pass');
-        return new UserBase(user);
+    async cadastrar({ nome, email, senha, permissao }) {
+        const user = await this.conn.create({ nome, email, senha, permissao })
+        return  new UsuarioEntity({
+             id: user.id, 
+             nome: user.nome, 
+             email: user.email, 
+             senha: user.senha, 
+             permissao: user.permissao,
+             created: user.created_at,
+             updated: user.updated_at
+            })
     }
 }
 

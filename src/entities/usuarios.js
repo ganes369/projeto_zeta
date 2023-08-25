@@ -10,9 +10,9 @@ class Usuarios {
     }
 
     update(action, book) {
-        console.log(
-            `${this.nome} foi notificado sobre a ação: ${action} do livro "${book}".`
-        );
+        //   console.log(
+        //      `${this.nome} foi notificado sobre a ação: ${action} do livro "${book}".`
+        //   );
         return `${this.nome} foi notificado sobre a ação: ${action} do livro "${book}".`;
     }
 }

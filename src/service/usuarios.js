@@ -17,7 +17,7 @@ class UserService {
             throw new UsuariosError('wrong password or email ;(', '404');
 
         const jwt = this.jwt.sign(
-            { id: user.id, permission: user.permission, email },
+            { id: user.id, permissao: user.permissao, email },
             7200
         );
         return { ...user, token: jwt };
@@ -25,7 +25,7 @@ class UserService {
 
     async cadastrar({ nome, email, senha, permissao }) {
         const hash = await this.bcrypt.hash(senha);
-        return await this.user.cadastrar({
+        return this.user.cadastrar({
             nome,
             email,
             senha: hash,

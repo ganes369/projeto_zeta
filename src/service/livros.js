@@ -6,11 +6,11 @@ class LivroService {
     }
 
     async listarLivros(pagina) {
-        return await this.repository.listar(pagina);
+        return this.repository.listar(pagina);
     }
 
     async listarPorId(id) {
-        const livro = await this.repository.listarPorId(id);
+        const livro = this.repository.listarPorId(id);
         if (!livro) throw new LivrosError('Not Found id', '404');
         return livro;
     }

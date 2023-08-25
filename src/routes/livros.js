@@ -41,7 +41,6 @@ class LivrosRotas {
             const livro = await this.repositorio.listarPorId(id);
             return res.status(200).json(livro);
         } catch (error) {
-            console.log(error);
             const err = new LivrosErro(error.message, error.errorCode || 500);
             return res
                 .status(err.errorCode)

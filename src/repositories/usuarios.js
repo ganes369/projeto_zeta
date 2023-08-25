@@ -7,7 +7,7 @@ class UsuarioRepositorio {
 
     async login({ email }) {
         const user = await this.conn.findOne({ where: { email } });
-        if (!user) return;
+        if (!user) return undefined;
         return new UsuarioEntidade({
             id: user.id,
             nome: user.nome,

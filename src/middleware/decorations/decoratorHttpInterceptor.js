@@ -4,7 +4,7 @@ const { deleteProp } = require('../../utils/hidePropertie');
 async function DecoratorHttpInterceptor() {
     const oldRespose = express.response.json; // .toString()
 
-    express.response.json = function (...args) {
+    function removerPropos(...args) {
         const oldEmit = express?.response.setHeader; // .toString()
         if (args[0].token) {
             oldEmit.apply(this, ['token', args[0].token]);
@@ -12,7 +12,8 @@ async function DecoratorHttpInterceptor() {
         }
 
         return oldRespose.apply(this, args);
-    };
+    }
+    express.response.json = removerPropos;
 }
 
 module.exports = { DecoratorHttpInterceptor };

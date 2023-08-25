@@ -11,34 +11,34 @@ class LivroRepositorio {
             limit: this.tamanho_pagina,
             offset: (pagina - 1) * this.tamanho_pagina,
         });
-        const result = [];
-        for (const livro of livros) {
-            result.push(
+        if (!livros) return undefined;
+        const result = livros.map(
+            (item) =>
                 new LivrosEntidade({
-                    id: livro.id,
-                    titulo: livro.titulo,
-                    autor: livro.autor,
-                    generos: livro.generos,
-                    status: livro.status,
-                    created: livro.created_at,
-                    updated: livro.updated_at,
+                    id: item.id,
+                    titulo: item.titulo,
+                    autor: item.autor,
+                    generos: item.generos,
+                    status: item.status,
+                    created: item.created_at,
+                    updated: item.updated_at,
                 })
-            );
-        }
+        );
+
         return result;
     }
 
     async listarPorId(id) {
         const livro = await this.conn.findByPk(id);
-        if (!livro) return;
+        if (!livro) return undefined;
         return new LivrosEntidade({
-            id: livro?.id,
-            titulo: livro?.titulo,
-            autor: livro?.autor,
-            generos: livro?.generos,
-            status: livro?.status,
-            created: livro?.created_at,
-            updated: livro?.updated_at,
+            id: livro.id,
+            titulo: livro.titulo,
+            autor: livro.autor,
+            generos: livro.generos,
+            status: livro.status,
+            created: livro.created_at,
+            updated: livro.updated_at,
         });
     }
 }

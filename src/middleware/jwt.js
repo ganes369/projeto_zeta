@@ -1,11 +1,14 @@
+/* eslint-disable consistent-return */
 const jwt = require('jsonwebtoken');
 
 class JwtService {
-    constructor() {}
+    constructor() {
+        this.jwt = jwt;
+    }
 
     sign(...args) {
         const [payload, expire] = args;
-        const token = jwt.sign(payload, process.env.SECRET, {
+        const token = this.jwt.sign(payload, process.env.SECRET, {
             expiresIn: expire,
         });
 
@@ -18,8 +21,7 @@ class JwtService {
             return res
                 .status(401)
                 .json({ auth: false, message: 'No token provided.' });
-
-        jwt.verify(token.split(' ')[1], 'secret', function (err, decoded) {
+        function validar(err, decoded) {
             if (err)
                 return res.status(500).json({
                     auth: false,
@@ -27,7 +29,9 @@ class JwtService {
                 });
             req.payload = decoded;
             next();
-        });
+        }
+
+        this.jwt.verify(token.split(' ')[1], 'secret', validar);
     }
 }
 

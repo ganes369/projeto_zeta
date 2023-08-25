@@ -1,4 +1,3 @@
-const path = require('path');
 const UsuarioService = require('../service/usuarios');
 const UsuarioError = require('../error/usuarios');
 const BcryptService = require('../utils/encrypt');

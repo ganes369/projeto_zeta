@@ -16,5 +16,6 @@ module.exports = {
     },
     rules: {
         'prettier/prettier': 'error',
+        'no-param-reassign': 'off',
     },
 };

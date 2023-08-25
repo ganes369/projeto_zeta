@@ -1,4 +1,4 @@
-class Livro {
+class Livros {
     constructor({ id, titulo, autor, generos, status, created, updated }) {
         (this.id = id),
             (this.titulo = titulo),
@@ -10,4 +10,4 @@ class Livro {
     }
 }
 
-module.exports = Livro;
+module.exports = Livros;

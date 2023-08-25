@@ -1,25 +1,23 @@
 const LivrosErro = require('../error/livros');
 const LivrosService = require('../service/livros');
-const { DecoratorHttpInterceptor } = require('../middleware/decorations/decoratorHttpInterceptor');
-const { DecoratorResponse } = require('../middleware/decorations/decoratorResponse');
+const {
+    DecoratorHttpInterceptor,
+} = require('../middleware/decorations/decoratorHttpInterceptor');
+const {
+    DecoratorResponse,
+} = require('../middleware/decorations/decoratorResponse');
 
 DecoratorResponse();
 DecoratorHttpInterceptor();
-class Livros {
+class LivrosRotas {
     constructor(router, jwt, repositorio) {
         this.router = router;
         this.jwt = jwt;
-        this.repositorio = new LivrosService(repositorio)
-        
-        this.router.get(
-            '/listar',
-            this.listarLivros.bind(this)
-        );
+        this.repositorio = new LivrosService(repositorio);
 
-        this.router.get(
-            '/porid',
-            this.listarPorId.bind(this)
-        );
+        this.router.get('/listar', this.listarLivros.bind(this));
+
+        this.router.get('/porid', this.listarPorId.bind(this));
     }
 
     async listarLivros(req, res) {
@@ -52,4 +50,4 @@ class Livros {
     }
 }
 
-module.exports = Livros;
+module.exports = LivrosRotas;

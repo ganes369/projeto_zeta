@@ -6,7 +6,7 @@ class Usuarios {
         this.senha = senha;
         this.permissao = permissao;
         this.created = new Date(created);
-        this.updated = new Date(updated)
+        this.updated = new Date(updated);
     }
 
     update(action, book) {

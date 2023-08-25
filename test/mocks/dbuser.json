@@ -1,17 +1,17 @@
 [
-  {
-    "id": 1,
-    "nick": "admin",
-    "pass": "123",
-    "email": "aras@gmail.com",
-    "permission": 63
-  },
+    {
+        "id": 1,
+        "nick": "admin",
+        "pass": "123",
+        "email": "aras@gmail.com",
+        "permission": 63
+    },
 
-  {
-    "id": 2,
-    "nick": "maria",
-    "pass": "123",
-    "email": "maria@gmail.com",
-    "permission": 17
-  }
+    {
+        "id": 2,
+        "nick": "maria",
+        "pass": "123",
+        "email": "maria@gmail.com",
+        "permission": 17
+    }
 ]

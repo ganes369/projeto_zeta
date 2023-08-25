@@ -1,8 +1,8 @@
 const path = require('node:path');
+const { expect, describe, test, jest, beforeEach } = require('@jest/globals');
 const UserBase = require('../../../../src/entities/user_base');
 const JwtService = require('../../../../src/middleware/jwt');
 const UserRespository = require('../../../../src/repositories/user_repository');
-// { expect, describe, test, jest, beforeEach } = require('@jest/globals');
 const UserService = require('../../../../src/service/user_service');
 
 class JwtMock extends JwtService {

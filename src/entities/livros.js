@@ -4,9 +4,9 @@ class Livros {
             (this.titulo = titulo),
             (this.autor = autor),
             (this.status = status);
-        this.generos = generos
-        this.created = created
-        this.updated = updated
+        this.generos = generos;
+        this.created = created;
+        this.updated = updated;
     }
 }
 

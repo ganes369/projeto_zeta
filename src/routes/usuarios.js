@@ -1,25 +1,31 @@
+const path = require('path');
 const UsuarioService = require('../service/usuarios');
 const UsuarioError = require('../error/usuarios');
 const BcryptService = require('../utils/encrypt');
 
-const path = require('path');
-
-const { DecoratorHttpInterceptor } = require('../middleware/decorations/decoratorHttpInterceptor');
-const { DecoratorResponse } = require('../middleware/decorations/decoratorResponse');
+const {
+    DecoratorHttpInterceptor,
+} = require('../middleware/decorations/decoratorHttpInterceptor');
+const {
+    DecoratorResponse,
+} = require('../middleware/decorations/decoratorResponse');
 const { permissionAdmin } = require('../middleware/permission');
-
 
 DecoratorResponse();
 DecoratorHttpInterceptor();
-class User {
+class UsuarioRota {
     constructor(router, jwt, user) {
         this.router = router;
         this.jwt = jwt;
-        this.user = new UsuarioService(user,this.jwt, new BcryptService());
+        this.user = new UsuarioService(user, this.jwt, new BcryptService());
 
         this.router.post('/login', this.login.bind(this));
-        this.router.post('/cadastro', this.jwt.verify,
-        permissionAdmin, this.cadastro.bind(this));
+        this.router.post(
+            '/cadastro',
+            this.jwt.verify,
+            permissionAdmin,
+            this.cadastro.bind(this)
+        );
     }
 
     async login(req, res) {
@@ -37,8 +43,13 @@ class User {
 
     async cadastro(req, res) {
         try {
-            const { nome, email, senha, permissao } = req.body
-            const user = await this.user.cadastrar({ nome, email, senha, permissao })
+            const { nome, email, senha, permissao } = req.body;
+            const user = await this.user.cadastrar({
+                nome,
+                email,
+                senha,
+                permissao,
+            });
             return res.status(200).json(user);
         } catch (error) {
             const err = new UsuarioError(error.message, error.errorCode || 500);
@@ -49,4 +60,4 @@ class User {
     }
 }
 
-module.exports = User;
+module.exports = UsuarioRota;

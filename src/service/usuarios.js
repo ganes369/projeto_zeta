@@ -4,7 +4,7 @@ class UserService {
     constructor(repository, jwt, bcrypt) {
         this.user = repository;
         this.jwt = jwt;
-        this.bcrypt =bcrypt;
+        this.bcrypt = bcrypt;
     }
 
     async login({ email, senha }) {
@@ -13,7 +13,8 @@ class UserService {
 
         const isMatch = await this.bcrypt.compare(senha, user.senha);
 
-        if(!isMatch) throw new UsuariosError('wrong password or email ;(', '404');
+        if (!isMatch)
+            throw new UsuariosError('wrong password or email ;(', '404');
 
         const jwt = this.jwt.sign(
             { id: user.id, permission: user.permission, email },
@@ -22,9 +23,14 @@ class UserService {
         return { ...user, token: jwt };
     }
 
-    async cadastrar({ nome, email, senha, permissao }){
+    async cadastrar({ nome, email, senha, permissao }) {
         const hash = await this.bcrypt.hash(senha);
-        return await this.user.cadastrar({ nome, email, senha: hash, permissao });
+        return await this.user.cadastrar({
+            nome,
+            email,
+            senha: hash,
+            permissao,
+        });
     }
 }
 module.exports = UserService;

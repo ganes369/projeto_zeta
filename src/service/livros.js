@@ -1,4 +1,4 @@
-const LivrosError = require("../error/livros");
+const LivrosError = require('../error/livros');
 
 class LivroService {
     constructor(repository) {
@@ -7,12 +7,12 @@ class LivroService {
 
     async listarLivros(pagina) {
         return await this.repository.listar(pagina);
-    }  
-    
+    }
+
     async listarPorId(id) {
         const livro = await this.repository.listarPorId(id);
-        if(!livro) throw new LivrosError('Not Found id', '404')
-        return livro
+        if (!livro) throw new LivrosError('Not Found id', '404');
+        return livro;
     }
 }
 module.exports = LivroService;

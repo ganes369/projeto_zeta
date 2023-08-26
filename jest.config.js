@@ -34,6 +34,10 @@ module.exports = {
             statements: 100,
         },
     },
+    coveragePathIgnorePatterns: [
+        '/node_modules/',
+        '/test/'
+      ],
 
     maxWorkers: '50%',
     testEnvironment: 'node',

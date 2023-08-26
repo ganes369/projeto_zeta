@@ -1,6 +1,7 @@
 const UsuariosError = require('../error/usuarios');
+const Gerador = require('../utils/gerador');
 
-class UserService {
+class UsuarioServico {
     constructor(repository, jwt, bcrypt) {
         this.user = repository;
         this.jwt = jwt;
@@ -23,8 +24,9 @@ class UserService {
         return { ...user, token: jwt };
     }
 
-    async cadastrar({ nome, email, senha, permissao }) {
-        const hash = await this.bcrypt.hash(senha);
+    async cadastrar({ nome, email, permissao }) {
+        const senhaAleatoria = Gerador.geradorSenha();
+        const hash = await this.bcrypt.hash(senhaAleatoria);
         return this.user.cadastrar({
             nome,
             email,
@@ -33,4 +35,4 @@ class UserService {
         });
     }
 }
-module.exports = UserService;
+module.exports = UsuarioServico;

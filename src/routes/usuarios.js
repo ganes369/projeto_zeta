@@ -42,11 +42,10 @@ class UsuarioRota {
 
     async cadastro(req, res) {
         try {
-            const { nome, email, senha, permissao } = req.body;
+            const { nome, email, permissao } = req.body;
             const user = await this.user.cadastrar({
                 nome,
                 email,
-                senha,
                 permissao,
             });
             return res.status(200).json(user);

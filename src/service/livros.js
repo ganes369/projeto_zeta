@@ -10,9 +10,13 @@ class LivroService {
     }
 
     async listarPorId(id) {
-        const livro = this.repository.listarPorId(id);
+        const livro = await this.repository.listarPorId(id);
         if (!livro) throw new LivrosError('Not Found id', '404');
         return livro;
     }
 }
 module.exports = LivroService;
+
+/**
+ * o uso de await em uma expressão de retorno é redundante. Isso ocorre porque, ao usar await em uma expressão de retorno, você está aguardando a resolução de uma promessa antes de retornar o valor, o que pode não ser necessário em alguns casos.
+ */

@@ -1,15 +1,7 @@
 const LivrosErro = require('../error/livros');
 const LivrosService = require('../service/livros');
-const {
-    DecoratorHttpInterceptor,
-} = require('../middleware/decorations/decoratorHttpInterceptor');
-const {
-    DecoratorResponse,
-} = require('../middleware/decorations/decoratorResponse');
 const { permissionAdmin } = require('../middleware/permission');
 
-DecoratorResponse();
-DecoratorHttpInterceptor();
 class LivrosRotas {
     constructor(router, jwt, repositorio) {
         this.router = router;

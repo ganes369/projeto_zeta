@@ -1,4 +1,4 @@
-class Livros {
+class LivrosEntidade {
     constructor({ id, titulo, autor, generos, status, created, updated }) {
         this.id = id;
         this.titulo = titulo;
@@ -18,4 +18,4 @@ class Livros {
     }
 }
 
-module.exports = Livros;
+module.exports = LivrosEntidade;

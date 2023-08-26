@@ -22,7 +22,7 @@ class LivroRepositorio {
                     status: item.status,
                     created: item.created_at,
                     updated: item.updated_at,
-                })
+                }).capitalizeAfterSpace()
         );
 
         return result;
@@ -39,6 +39,20 @@ class LivroRepositorio {
             status: livro.status,
             created: livro.created_at,
             updated: livro.updated_at,
+        });
+    }
+
+    async cadatrar({ titulo, autor, generos, status }){
+        const livro = await this.conn.create({ titulo, autor, generos, status });
+        if (!livro) return undefined;
+        return new LivrosEntidade({
+            id: livro.id,
+            titulo: livro.titulo,
+            autor: livro.autor,
+            generos: livro.generos,
+            status: livro.status,
+            created: livro?.created_at,
+            updated: livro?.updated_at,
         });
     }
 }

@@ -21,7 +21,8 @@ class JwtService {
             return res
                 .status(401)
                 .json({ auth: false, message: 'No token provided.' });
-        function validar(err, decoded) {
+
+        jwt.verify(token.split(' ')[1], 'secret', function (err, decoded) {
             if (err)
                 return res.status(500).json({
                     auth: false,
@@ -29,9 +30,7 @@ class JwtService {
                 });
             req.payload = decoded;
             next();
-        }
-
-        this.jwt.verify(token.split(' ')[1], 'secret', validar);
+        });
     }
 }
 

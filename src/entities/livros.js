@@ -5,8 +5,16 @@ class Livros {
         this.autor = autor;
         this.status = status;
         this.generos = generos;
-        this.created = created;
-        this.updated = updated;
+        this.created = new Date(created);
+        this.updated = new Date(updated);
+    }
+
+    capitalizeAfterSpace() {
+         this.titulo = this.titulo.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+         this.autor = this.autor.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+         this.generos = this.generos.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+         this.status = this.status.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+         return this
     }
 }
 

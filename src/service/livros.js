@@ -12,7 +12,12 @@ class LivroService {
     async listarPorId(id) {
         const livro = await this.repository.listarPorId(id);
         if (!livro) throw new LivrosError('Not Found id', '404');
-        return livro;
+        return livro.capitalizeAfterSpace();
+    }
+
+    async cadatrar({ titulo, autor, generos, status }){
+        const livro = await this.repository.cadatrar({ titulo, autor, generos, status });
+        return livro.capitalizeAfterSpace()
     }
 }
 module.exports = LivroService;

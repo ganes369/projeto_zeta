@@ -1,4 +1,4 @@
-const BcryptService = require("../../../src/utils/encrypt");
+const BcryptService = require('../../../src/utils/encrypt');
 
 class MockEncrypt extends BcryptService {
     hash(...args) {
@@ -10,4 +10,4 @@ class MockEncrypt extends BcryptService {
     }
 }
 
-module.exports = MockEncrypt
+module.exports = MockEncrypt;

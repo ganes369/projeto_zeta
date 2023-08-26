@@ -10,11 +10,19 @@ class LivrosEntidade {
     }
 
     capitalizeAfterSpace() {
-         this.titulo = this.titulo.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
-         this.autor = this.autor.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
-         this.generos = this.generos.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
-         this.status = this.status.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
-         return this
+        this.titulo = this.titulo.replace(/(?:^|\s)\S/g, function (a) {
+            return a.toUpperCase();
+        });
+        this.autor = this.autor.replace(/(?:^|\s)\S/g, function (a) {
+            return a.toUpperCase();
+        });
+        this.generos = this.generos.replace(/(?:^|\s)\S/g, function (a) {
+            return a.toUpperCase();
+        });
+        this.status = this.status.replace(/(?:^|\s)\S/g, function (a) {
+            return a.toUpperCase();
+        });
+        return this;
     }
 }
 

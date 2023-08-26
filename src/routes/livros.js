@@ -12,8 +12,12 @@ class LivrosRotas {
 
         this.router.get('/porid', this.listarPorId.bind(this));
 
-        this.router.post('/cadastra', this.jwt.verify,
-        permissionAdmin, this.cadatrar.bind(this));
+        this.router.post(
+            '/cadastra',
+            this.jwt.verify,
+            permissionAdmin,
+            this.cadatrar.bind(this)
+        );
     }
 
     async listarLivros(req, res) {
@@ -43,10 +47,16 @@ class LivrosRotas {
                 .json(JSON.parse(JSON.stringify(err, null, 2)));
         }
     }
-    async cadatrar(req, res){
+
+    async cadatrar(req, res) {
         try {
             const { titulo, autor, generos, status } = req.body;
-            const livro = await this.repositorio.cadatrar({ titulo, autor, generos, status });
+            const livro = await this.repositorio.cadatrar({
+                titulo,
+                autor,
+                generos,
+                status,
+            });
             return res.status(200).json(livro);
         } catch (error) {
             const err = new LivrosErro(error.message, error.errorCode || 500);
@@ -54,7 +64,6 @@ class LivrosRotas {
                 .status(err.errorCode)
                 .json(JSON.parse(JSON.stringify(err, null, 2)));
         }
-
     }
 }
 

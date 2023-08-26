@@ -10,7 +10,7 @@ describe('Servico de Usuario login', () => {
     let repository;
     let bcrypt;
     let jwt;
-    
+
     beforeEach(() => {
         jest.clearAllMocks();
         repository = new MockRepositorioUsuario();
@@ -37,18 +37,21 @@ describe('Servico de Usuario login', () => {
             email: 'aras@gmail.com',
             permissao: 63,
             token: 'token',
-            created: new Date(2023,8,26),
-            updated: new Date(2023,8,26),
+            created: new Date(2023, 8, 26),
+            updated: new Date(2023, 8, 26),
         });
     });
 
     test('Deverá retornar erro caso a senha de usuario esteja incorreta', async () => {
         const spyJwt = jest.spyOn(jwt, 'sign');
-        const spyLogin = jest.spyOn(repository, 'login')
-        const spyBcrypt = jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(undefined)
+        const spyLogin = jest.spyOn(repository, 'login');
+        const spyBcrypt = jest
+            .spyOn(bcrypt, 'compare')
+            .mockResolvedValueOnce(undefined);
 
-        await expect(instanciaUsuario.login({ email: 'aras@gmail.com', senha: '123', }))
-        .rejects.toThrow(UsuariosErro);
+        await expect(
+            instanciaUsuario.login({ email: 'aras@gmail.com', senha: '123' })
+        ).rejects.toThrow(UsuariosErro);
         expect(spyJwt).not.toHaveBeenCalled();
         expect(spyLogin).toHaveBeenCalled();
         expect(spyBcrypt).toHaveBeenCalled();
@@ -58,44 +61,43 @@ describe('Servico de Usuario login', () => {
         const spyJwt = jest.spyOn(jwt, 'sign');
         const spyBcrypt = jest.spyOn(bcrypt, 'compare');
 
-        jest.spyOn(repository, 'login').mockResolvedValueOnce(undefined)
-  
-        await expect(instanciaUsuario.login({ email: 'aras@gmail.com', senha: '123', }))
-        .rejects.toThrow(UsuariosErro);
+        jest.spyOn(repository, 'login').mockResolvedValueOnce(undefined);
+
+        await expect(
+            instanciaUsuario.login({ email: 'aras@gmail.com', senha: '123' })
+        ).rejects.toThrow(UsuariosErro);
         expect(spyJwt).not.toHaveBeenCalled();
         expect(spyBcrypt).not.toHaveBeenCalled();
     });
-
-  
 });
 
 describe('Servico de Usuario Cadastra', () => {
     let instanciaUsuario;
     let repository;
     let bcrypt;
-    let jwt
+    let jwt;
     beforeEach(() => {
         jest.clearAllMocks();
         repository = new MockRepositorioUsuario();
-        bcrypt = new MockEncrypt()
+        bcrypt = new MockEncrypt();
         jwt = new JwtMock();
-        instanciaUsuario = new UsuarioServico(repository, jwt, bcrypt)
+        instanciaUsuario = new UsuarioServico(repository, jwt, bcrypt);
     });
 
     test('Deverá retornar usuario cadastrado e persisti-lo com a senha criptada', async () => {
         const spyBcrypt = jest.spyOn(bcrypt, 'hash');
         const spyRepositorio = jest.spyOn(repository, 'cadastrar');
         const resultado = await instanciaUsuario.cadastrar({
-            email: "usuario@gmail.com",
+            email: 'usuario@gmail.com',
             senha: '123',
-            nome: "usuario",
+            nome: 'usuario',
             permissao: 1,
         });
 
         expect(spyBcrypt).toHaveBeenCalled();
         expect(spyRepositorio).toHaveBeenCalledWith({
-            nome: "usuario",
-            email: "usuario@gmail.com",
+            nome: 'usuario',
+            email: 'usuario@gmail.com',
             permissao: 1,
             senha: 'hash',
         });
@@ -105,9 +107,8 @@ describe('Servico de Usuario Cadastra', () => {
             senha: '123',
             email: 'usuario@gmail.com',
             permissao: 1,
-            created: new Date(2023,8,26),
-            updated: new Date(2023,8,26),
+            created: new Date(2023, 8, 26),
+            updated: new Date(2023, 8, 26),
         });
     });
 });
-

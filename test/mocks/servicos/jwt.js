@@ -1,4 +1,4 @@
-const JwtService = require("../../../src/middleware/jwt");
+const JwtService = require('../../../src/middleware/jwt');
 
 class JwtMock extends JwtService {
     sign(...args) {
@@ -10,4 +10,4 @@ class JwtMock extends JwtService {
     }
 }
 
-module.exports = JwtMock
+module.exports = JwtMock;

@@ -15,9 +15,14 @@ class LivroService {
         return livro.capitalizeAfterSpace();
     }
 
-    async cadatrar({ titulo, autor, generos, status }){
-        const livro = await this.repository.cadatrar({ titulo, autor, generos, status });
-        return livro.capitalizeAfterSpace()
+    async cadatrar({ titulo, autor, generos, status }) {
+        const livro = await this.repository.cadatrar({
+            titulo,
+            autor,
+            generos,
+            status,
+        });
+        return livro.capitalizeAfterSpace();
     }
 }
 module.exports = LivroService;

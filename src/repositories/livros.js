@@ -12,17 +12,16 @@ class LivroRepositorio {
             offset: (pagina - 1) * this.tamanho_pagina,
         });
         if (!livros) return undefined;
-        const result = livros.map(
-            (item) =>
-                new LivrosEntidade({
-                    id: item.id,
-                    titulo: item.titulo,
-                    autor: item.autor,
-                    generos: item.generos,
-                    status: item.status,
-                    created: item.created_at,
-                    updated: item.updated_at,
-                }).capitalizeAfterSpace()
+        const result = livros.map((item) =>
+            new LivrosEntidade({
+                id: item.id,
+                titulo: item.titulo,
+                autor: item.autor,
+                generos: item.generos,
+                status: item.status,
+                created: item.created_at,
+                updated: item.updated_at,
+            }).capitalizeAfterSpace()
         );
 
         return result;
@@ -42,8 +41,13 @@ class LivroRepositorio {
         });
     }
 
-    async cadatrar({ titulo, autor, generos, status }){
-        const livro = await this.conn.create({ titulo, autor, generos, status });
+    async cadatrar({ titulo, autor, generos, status }) {
+        const livro = await this.conn.create({
+            titulo,
+            autor,
+            generos,
+            status,
+        });
         if (!livro) return undefined;
         return new LivrosEntidade({
             id: livro.id,

@@ -1,5 +1,5 @@
-const Usuarios = require("../../../../src/entities/usuarios");
-const UsuarioRepositorio = require("../../../../src/repositories/usuarios");
+const Usuarios = require('../../../../src/entities/usuarios');
+const UsuarioRepositorio = require('../../../../src/repositories/usuarios');
 
 class MockRepositorioUsuario extends UsuarioRepositorio {
     login(...args) {
@@ -9,8 +9,8 @@ class MockRepositorioUsuario extends UsuarioRepositorio {
             senha: '123',
             email: 'aras@gmail.com',
             permissao: 63,
-            created: new Date(2023,8,26),
-            updated: new Date(2023,8,26),
+            created: new Date(2023, 8, 26),
+            updated: new Date(2023, 8, 26),
         });
     }
 
@@ -21,10 +21,10 @@ class MockRepositorioUsuario extends UsuarioRepositorio {
             senha: '123',
             email: 'usuario@gmail.com',
             permissao: 1,
-            created: new Date(2023,8,26),
-            updated: new Date(2023,8,26),
+            created: new Date(2023, 8, 26),
+            updated: new Date(2023, 8, 26),
         });
     }
 }
 
-module.exports = MockRepositorioUsuario
+module.exports = MockRepositorioUsuario;

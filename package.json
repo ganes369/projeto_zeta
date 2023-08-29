@@ -9,7 +9,8 @@
         "format": "prettier --write .",
         "start": "nodemon -r dotenv/config src/api.js",
         "test": "npx jest --runInBand --config ./jest.config.js",
-        "test:cov": "npx jest --config ./jest.config.js --coverage"
+        "test:cov": "npx jest --config ./jest.config.js --coverage",
+        "migrate": "npx sequelize db:migrate"
     },
     "keywords": [],
     "author": "",

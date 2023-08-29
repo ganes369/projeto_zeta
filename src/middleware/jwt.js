@@ -22,7 +22,7 @@ class JwtService {
                 .status(401)
                 .json({ auth: false, message: 'No token provided.' });
 
-        jwt.verify(token.split(' ')[1], 'secret', function (err, decoded) {
+        jwt.verify(token.split(' ')[1], process.env.SECRET, function (err, decoded) {
             if (err)
                 return res.status(500).json({
                     auth: false,

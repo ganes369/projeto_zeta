@@ -28,6 +28,9 @@ module.exports = {
                     isIn: [['livre', 'ocupado']], // Valores permitidos
                 },
             },
+            foto: {
+                type: Sequelize.STRING,
+            },
             created_at: {
                 type: Sequelize.DATE,
                 allowNull: false,

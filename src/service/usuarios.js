@@ -1,6 +1,8 @@
 const UsuariosError = require('../error/usuarios');
 const Gerador = require('../utils/gerador');
 
+const emissorEvento = require('../emiters/emissor');
+
 class UsuarioServico {
     constructor(repository, jwt, bcrypt) {
         this.user = repository;
@@ -27,12 +29,17 @@ class UsuarioServico {
     async cadastrar({ nome, email, permissao }) {
         const senhaAleatoria = Gerador.geradorSenha();
         const hash = await this.bcrypt.hash(senhaAleatoria);
-        return this.user.cadastrar({
+        
+        const resultado = await this.user.cadastrar({
             nome,
             email,
             senha: hash,
             permissao,
         });
+  
+        emissorEvento.emit('userRegistered', {senhaAleatoria, email});
+
+        return resultado
     }
 }
 module.exports = UsuarioServico;

@@ -9,7 +9,7 @@ class Gerador {
             const randomIndex = Math.floor(Math.random() * characters.length);
             password += characters.charAt(randomIndex);
         }
-        console.log(password, '---------------------------------------');
+
         return password;
     }
 }

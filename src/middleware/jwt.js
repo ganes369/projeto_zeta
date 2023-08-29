@@ -22,15 +22,19 @@ class JwtService {
                 .status(401)
                 .json({ auth: false, message: 'No token provided.' });
 
-        jwt.verify(token.split(' ')[1], process.env.SECRET, function (err, decoded) {
-            if (err)
-                return res.status(500).json({
-                    auth: false,
-                    message: 'Failed to authenticate token.',
-                });
-            req.payload = decoded;
-            next();
-        });
+        jwt.verify(
+            token.split(' ')[1],
+            process.env.SECRET,
+            function (err, decoded) {
+                if (err)
+                    return res.status(500).json({
+                        auth: false,
+                        message: 'Failed to authenticate token.',
+                    });
+                req.payload = decoded;
+                next();
+            }
+        );
     }
 }
 

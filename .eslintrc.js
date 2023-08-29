@@ -17,5 +17,8 @@ module.exports = {
     rules: {
         'prettier/prettier': 'error',
         'no-param-reassign': 'off',
+        'no-unused-vars': 'off',
+        'func-names': 'off',
+        'class-methods-use-this': 'off',
     },
 };

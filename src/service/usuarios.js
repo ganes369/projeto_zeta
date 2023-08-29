@@ -29,17 +29,17 @@ class UsuarioServico {
     async cadastrar({ nome, email, permissao }) {
         const senhaAleatoria = Gerador.geradorSenha();
         const hash = await this.bcrypt.hash(senhaAleatoria);
-        
+
         const resultado = await this.user.cadastrar({
             nome,
             email,
             senha: hash,
             permissao,
         });
-  
-        emissorEvento.emit('userRegistered', {senhaAleatoria, email});
 
-        return resultado
+        emissorEvento.emit('acessoUsuario', { senhaAleatoria, email });
+
+        return resultado;
     }
 }
 module.exports = UsuarioServico;

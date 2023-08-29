@@ -1,8 +1,9 @@
-require('dotenv').config(); 
+require('dotenv').config();
+
 module.exports = {
     dialect: process.env.DIALECT,
     host: process.env.HOST,
-    username: process.env.USERNAMEDB,//'postgres',
+    username: process.env.USERNAMEDB, // 'postgres',
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
     define: {
@@ -10,5 +11,4 @@ module.exports = {
         underscored: true,
     },
     logging: false, // Desativa o logging das consultas
-
 };

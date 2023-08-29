@@ -12,7 +12,9 @@ const LivrosModel = require('./models/livros');
 
 const JwtService = require('./middleware/jwt');
 
-const { DecoratorLowerCase } = require('./middleware/decorations/decoratorLowerCase');
+const {
+    DecoratorLowerCase,
+} = require('./middleware/decorations/decoratorLowerCase');
 const enviarAcesso = require('./service/enviar_acesso');
 
 const app = express();
@@ -39,6 +41,6 @@ app.use('/user', usuariosRotas.router);
 // Resto da configuração do aplicativo...
 app.listen(3000, () => {
     console.log('Servidor iniciado na porta 3000');
-    //eventos:
-    enviarAcesso.enviarAcesso()
+    // eventos:
+    enviarAcesso.enviarAcesso();
 });

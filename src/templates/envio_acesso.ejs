@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template de E-mail</title>
+    <!-- Adicione os links para os arquivos CSS do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilo para garantir que o rodapé fique sempre no final */
+        html, body {
+            height: 100%;
+        }
+
+        #page-content {
+            flex: 1 0 auto;
+        }
+
+        #sticky-footer {
+            flex-shrink: none;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column">
+    <!-- Cabeçalho -->
+    <header style="padding: 20px;" class="text-white bg-info">
+        <div class="container">
+            <div>
+                <div class="col-md-6">
+                    <h1>Livraria Zeta</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Corpo do E-mail -->
+    <section id="page-content" style="padding: 40px;">
+        <div class="container">
+            <h5>Olá, <%= nome %>!</h5>
+            <p>Seu acesso ao nosso sistema:</p>
+            <small>Login: <%= email %></small>
+            <p></p>
+            <small>Senha: <%= senhaAleatoria %></small>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer id="sticky-footer" style="background-color: #343a40; color: #ffffff; padding: 20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2023 Zeta. Todos os direitos reservados.</p>
+                    <small style="font-size: 10px;">Telefone (88) 9999 - 9999 </small>
+                </div>
+                <div class="col-md-6 text-md-right">
+                    <p><a href="#">Política de Privacidade</a> | <a href="#">Cancelar Inscrição</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Adicione os scripts do Bootstrap no final do corpo -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

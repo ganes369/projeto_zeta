@@ -1,4 +1,6 @@
+const path = require('path');
 const nodemailer = require('nodemailer');
+const ejs = require('ejs');
 
 class Mailer {
     constructor() {
@@ -13,24 +15,29 @@ class Mailer {
         });
     }
 
-    async sendMail(to, subject, text) {
-        const mailOptions = {
-            from: 'aras.strong8@gmail.com', // Seu endereço de e-mail
-            to,
-            subject,
-            text,
-        };
+    async sendMail({ senhaAleatoria, email, nome, subject, templatePath }) {
+        try {
+            const renderedTemplate = await ejs.renderFile(
+                path.join(__dirname, templatePath),
+                { senhaAleatoria, nome, email }
+            );
 
-        this.transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.log('Erro ao enviar e-mail:', error);
-            } else {
-                console.log(
-                    'E-mail enviado com sucesso! Informações:',
-                    info.response
-                );
-            }
-        });
+            const mailOptions = {
+                from: 'aras.strong8@gmail.com',
+                to: email,
+                subject,
+                html: renderedTemplate,
+            };
+
+            const info = await this.transporter.sendMail(mailOptions);
+
+            console.log(
+                'E-mail enviado com sucesso! Informações:',
+                info.response
+            );
+        } catch (error) {
+            console.log('Erro ao enviar e-mail:', error);
+        }
     }
 }
 

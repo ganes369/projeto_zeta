@@ -16,6 +16,7 @@ const {
     DecoratorLowerCase,
 } = require('./middleware/decorations/decoratorLowerCase');
 const enviarAcesso = require('./service/enviar_acesso');
+const mailer = require('./service/email');
 
 const app = express();
 const jwt = new JwtService(process.env.SECRET);
@@ -42,5 +43,5 @@ app.use('/user', usuariosRotas.router);
 app.listen(3000, () => {
     console.log('Servidor iniciado na porta 3000');
     // eventos:
-    enviarAcesso.enviarAcesso();
+    enviarAcesso.enviarAcesso(mailer);
 });

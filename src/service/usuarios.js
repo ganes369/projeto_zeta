@@ -37,7 +37,13 @@ class UsuarioServico {
             permissao,
         });
 
-        emissorEvento.emit('acessoUsuario', { senhaAleatoria, email });
+        emissorEvento.emit('acessoUsuario', {
+            senhaAleatoria,
+            email,
+            nome,
+            subject: 'Acesso a conta livraria zeta',
+            templatePath: './../templates/envio_acesso.ejs',
+        });
 
         return resultado;
     }

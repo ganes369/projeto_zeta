@@ -4,14 +4,14 @@ const Gerador = require('../utils/gerador');
 const emissorEvento = require('../emiters/emissor');
 
 class UsuarioServico {
-    constructor(repository, jwt, bcrypt) {
-        this.user = repository;
+    constructor(servico, jwt, bcrypt) {
+        this.usuarioServico = servico;
         this.jwt = jwt;
         this.bcrypt = bcrypt;
     }
 
     async login({ email, senha }) {
-        const user = await this.user.login({ email });
+        const user = await this.usuarioServico.login({ email });
         if (!user) throw new UsuariosError('wrong password or email ;(', '404');
 
         const isMatch = await this.bcrypt.compare(senha, user.senha);
@@ -30,7 +30,7 @@ class UsuarioServico {
         const senhaAleatoria = Gerador.geradorSenha();
         const hash = await this.bcrypt.hash(senhaAleatoria);
 
-        const resultado = await this.user.cadastrar({
+        const resultado = await this.usuarioServico.cadastrar({
             nome,
             email,
             senha: hash,

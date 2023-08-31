@@ -29,7 +29,7 @@ class MockRepositorioLivro extends LivroRepositorio {
         return null;
     }
 
-    cadatrar(...args) {
+    cadastrar(...args) {
         return new LivrosEntidade({
             id: 1,
             titulo: 'titulo do livro',

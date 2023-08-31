@@ -1,47 +1,28 @@
 const express = require('express');
-require('../database/index');
-
-const UsuariosRotas = require('./routes/usuarios');
-const LivrosRotas = require('./routes/livros');
-
-const UserRespository = require('./repositories/usuarios');
-const LivrosRepository = require('./repositories/livros');
-
-const UsuariosModel = require('./models/usuarios');
-const LivrosModel = require('./models/livros');
-
-const JwtService = require('./middleware/jwt');
 
 const {
     DecoratorLowerCase,
 } = require('./middleware/decorations/decoratorLowerCase');
+
 const enviarAcesso = require('./service/enviar_acesso');
 const mailer = require('./service/email');
 
-const app = express();
-const jwt = new JwtService(process.env.SECRET);
+const { cadastrar, logar } = require('./routes/usuarios');
+const { listar, listarId, cadastra } = require('./routes/livros');
 
-// Middleware para analisar o corpo da requisição como JSON
+const app = express();
+
 app.use(express.json());
 app.use(DecoratorLowerCase);
 
-const livrosRotas = new LivrosRotas(
-    express.Router(),
-    jwt,
-    new LivrosRepository(LivrosModel)
-);
-app.use('/livro', livrosRotas.router);
+app.use('/usuario', cadastrar.router);
+app.use('/usuario', logar.router);
+app.use('/livro', listar.router);
+app.use('/livro', listarId.router);
+app.use('/livro', cadastra.router);
 
-const usuariosRotas = new UsuariosRotas(
-    express.Router(),
-    jwt,
-    new UserRespository(UsuariosModel)
-);
-app.use('/user', usuariosRotas.router);
-
-// Resto da configuração do aplicativo...
 app.listen(3000, () => {
     console.log('Servidor iniciado na porta 3000');
     // eventos:
-    enviarAcesso.enviarAcesso(mailer);
+     enviarAcesso.enviarAcesso(mailer);
 });

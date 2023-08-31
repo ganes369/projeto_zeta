@@ -15,7 +15,6 @@ module.exports = {
             autor: {
                 type: Sequelize.STRING,
                 allowNull: false,
-                unique: true,
             },
             generos: {
                 type: Sequelize.STRING,

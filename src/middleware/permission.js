@@ -14,7 +14,7 @@ function hasPermission(userPermissions, requiredPermission) {
 }
 
 // Função para autenticar o usuário e verificar permissões
-function permissionAdmin(req, res, next) {
+function permissaoAdmin(req, res, next) {
     // Verificando a permissão
     if (!hasPermission(req.payload.permissao, PERMISSION_ADMIN)) {
         return res.status(401).json({ auth: false, message: 'unauthorized' });
@@ -31,6 +31,6 @@ function permissionRead(req, res, next) {
 }
 
 module.exports = {
-    permissionAdmin,
+    permissaoAdmin,
     permissionRead,
 };

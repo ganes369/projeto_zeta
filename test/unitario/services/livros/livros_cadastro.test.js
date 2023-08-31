@@ -14,7 +14,7 @@ describe('Servico de Cadastro de livros', () => {
     });
 
     test('Deverá Cadastra um novo livro e captalizar a primeira letra das palavras', async () => {
-        const resultado = await instanciaLivro.cadatrar({
+        const resultado = await instanciaLivro.cadastrar({
             titulo: 'titulo do livro',
             autor: 'autor do livro',
             generos: 'generos',
@@ -33,12 +33,12 @@ describe('Servico de Cadastro de livros', () => {
     });
 
     test('Deverá repassar a exeption', async () => {
-        jest.spyOn(repository, 'cadatrar').mockRejectedValueOnce(
+        jest.spyOn(repository, 'cadastrar').mockRejectedValueOnce(
             new Error('violação de constrain de banco de dados')
         );
 
         await expect(
-            instanciaLivro.cadatrar({
+            instanciaLivro.cadastrar({
                 titulo: 'titulo do livro',
                 autor: 'autor do livro',
                 generos: 'generos',

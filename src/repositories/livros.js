@@ -1,63 +1,92 @@
+const { Sequelize } = require('sequelize');
 const LivrosEntidade = require('../entities/livros');
+const Livro = require('../models/livros');
+const dbConfig = require('../../config/database');
 
 class LivroRepositorio {
-    constructor(conn) {
-        this.conn = conn;
-        this.tamanho_pagina = 10;
+    constructor(){
+        this.paginaTamanho = 10
     }
 
     async listar(pagina) {
-        const livros = await this.conn.findAll({
-            limit: this.tamanho_pagina,
-            offset: (pagina - 1) * this.tamanho_pagina,
-        });
-        if (!livros) return undefined;
-        const result = livros.map((item) =>
-            new LivrosEntidade({
-                id: item.id,
-                titulo: item.titulo,
-                autor: item.autor,
-                generos: item.generos,
-                status: item.status,
-                created: item.created_at,
-                updated: item.updated_at,
-            }).capitalizeAfterSpace()
-        );
-
-        return result;
+        const conn = new Sequelize(dbConfig)
+        try {
+            Livro.init(conn)
+            const livros = await Livro.findAll({
+                limit: this.paginaTamanho,
+                offset: (pagina - 1) * this.paginaTamanho,
+            });
+            if (!livros) return undefined;
+            const result = livros.map((item) =>
+                new LivrosEntidade({
+                    id: item.id,
+                    titulo: item.titulo,
+                    autor: item.autor,
+                    generos: item.generos,
+                    status: item.status,
+                    created: item.created_at,
+                    updated: item.updated_at,
+                }).capitalizeAfterSpace()
+            );
+            return result;
+        } catch (error) {
+            throw new Error(error)
+        } finally {
+            await conn.close();
+        }
+        
     }
 
     async listarPorId(id) {
-        const livro = await this.conn.findByPk(id);
-        if (!livro) return undefined;
-        return new LivrosEntidade({
-            id: livro.id,
-            titulo: livro.titulo,
-            autor: livro.autor,
-            generos: livro.generos,
-            status: livro.status,
-            created: livro.created_at,
-            updated: livro.updated_at,
-        });
+        const conn = new Sequelize(dbConfig)
+        try {
+            Livro.init(conn)
+            const livros = await Livro.findByPk(id);
+            if (!livros) return undefined;
+            return new LivrosEntidade({
+                id: livros.id,
+                titulo: livros.titulo,
+                autor: livros.autor,
+                generos: livros.generos,
+                status: livros.status,
+                created: livros.created_at,
+                updated: livros.updated_at,
+            });
+        }  catch (error) {
+            throw new Error(error)
+        } finally {
+            await conn.close();
+        }
+        
     }
 
-    async cadatrar({ titulo, autor, generos, status }) {
-        const livro = await this.conn.create({
-            titulo,
-            autor,
-            generos,
-            status,
-        });
-        if (!livro) return undefined;
-        return new LivrosEntidade({
-            id: livro.id,
-            titulo: livro.titulo,
-            autor: livro.autor,
-            generos: livro.generos,
-            status: livro.status,
-            created: livro?.created_at,
-            updated: livro?.updated_at,
-        });
+    async cadastrar({ titulo, autor, generos, status }) {
+        const conn = new Sequelize(dbConfig)
+        try {
+            Livro.init(conn)
+            const livros = await Livro.create({
+                titulo,
+                autor,
+                generos,
+                status,
+            });
+            if (!livros) return undefined;
+            return new LivrosEntidade({
+                id: livros.id,
+                titulo: livros.titulo,
+                autor: livros.autor,
+                generos: livros.generos,
+                status: livros.status,
+                created: livros?.created_at,
+                updated: livros?.updated_at,
+            });
+            
+        }  catch (error) {
+            throw new Error(error)
+        } finally {
+            await conn.close();
+        }
+        
     }
 }
 
